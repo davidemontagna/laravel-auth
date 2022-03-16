@@ -8,7 +8,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-
+                <div class="mb-4">
+                    <a href="{{ route('admin.posts.create') }}" class="btn btn-primary">New Post</a>
+                </div>
             
                 <table class="table">
                     <thead>
@@ -29,14 +31,14 @@
                         <td>{{$post->title}}</td>
                         <td>{{$post->content}}</td>
                         <td>{{$post->slug}}</td>
-                        <td>
+                        <td class="d-flex justify-content-start align-items-center">
                             <a href="{{route("admin.posts.show", $post->id)}}"><button type="button" class="btn btn-info">Show</button></a>
-                            <a href="{{route("admin.posts.edit", $post->id)}}"><button type="button" class="mt-2 btn btn-success">Edit</button></a>
-                            <form action="{{route("posts.destroy", $post->id)}}" method="POST">
+                            <a href="{{route("admin.posts.edit", $post->id)}}" class="mx-2"><button type="button" class="btn btn-success">Edit</button></a>
+                            <form action="{{route("admin.posts.destroy", $post->id)}}" method="POST">
                             @csrf
                             @method("DELETE")
                             
-                                <input class="mt-2 btn btn-danger" type="submit" value="Delete">
+                                <input class="btn btn-danger" type="submit" value="Delete">
                             </form>
                         </td>
                     

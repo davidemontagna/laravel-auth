@@ -11,8 +11,8 @@
                 
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                            <h3 class="card-title">Title: {{$post->title}}</h3>
-                            <h6 class="card-text">ID: {{$post->id}}</h6>
+                        <h3 class="card-title">Title: {{$post->title}}</h3>
+                        <h6 class="card-text">ID: {{$post->id}}</h6>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Content: {{$post->content}}</li>

@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('title', 'Show')
+@section('title', 'Create')
     
 @section('content')    
     
@@ -14,7 +14,7 @@
             
                         <div class="mb-3">
                           <label for="title" class="form-label">Title</label>
-                          <input type="text" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}" id="title" name="title" placeholder="Insert the title">   
+                          <input type="text" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}" id="title" name="title" placeholder="Insert the title" required>   
                           @error('title')
                               <div class="alert alert-danger">{{ $message }}</div>
                           @enderror         
@@ -22,7 +22,7 @@
                         
                         <div class="mb-3">
                           <label for="content" class="form-label">Content</label>
-                          <textarea type="text" class="form-control @error('content') is-invalid @enderror" id="content" name="content" placeholder="Insert the content">{{old('content')}}</textarea>    
+                          <textarea type="text" class="form-control @error('content') is-invalid @enderror" id="content" name="content" placeholder="Insert the content" required>{{old('content')}}</textarea>    
                           @error('content')
                               <div class="alert alert-danger">{{ $message }}</div>
                           @enderror       
