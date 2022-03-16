@@ -9,6 +9,10 @@ use App\Post;
 
 class PostController extends Controller
 {
+    protected $valid = [
+        'title'=>'required|max:150|string',
+        'content'=>'required'
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -38,10 +42,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title'=>'required|max:150|string',
-            'content'=>'required'
-        ]);
+        $request->validate($this->valid);
 
         $data_form = $request->all();
 
@@ -94,10 +95,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $request->validate([
-            'title'=>'required|max:150|string',
-            'content'=>'required'
-        ]);
+        $request->validate($this->valid);
 
         $data_form = $request->all();
        
