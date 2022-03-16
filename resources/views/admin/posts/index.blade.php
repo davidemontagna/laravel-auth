@@ -35,8 +35,8 @@
                             <a href="{{route("admin.posts.show", $post->id)}}"><button type="button" class="btn btn-info">Show</button></a>
                             <a href="{{route("admin.posts.edit", $post->id)}}" class="mx-2"><button type="button" class="btn btn-success">Edit</button></a>
                             <form action="{{route("admin.posts.destroy", $post->id)}}" method="POST">
-                            @csrf
-                            @method("DELETE")
+                                @csrf
+                                @method("DELETE")
                             
                                 <input class="btn btn-danger" type="submit" value="Delete">
                             </form>

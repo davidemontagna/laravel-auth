@@ -45,8 +45,10 @@ class PostController extends Controller
 
         $data_form = $request->all();
 
+        //vado a creare lo slug inserendo un - al posto degli spazi
         $slug = Str::slug($data_form['title']);
 
+        //cotrollo se lo slug esiste già, in tal caso inserisco alla fine un - seguito da un numero
         $count = 1;
         while(Post::where('slug', $slug)->first()){
             $slug = Str::slug($data_form['title'])."-".$count;
@@ -78,9 +80,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -90,9 +92,29 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title'=>'required|max:150|string',
+            'content'=>'required'
+        ]);
+
+        $data_form = $request->all();
+       
+        if($post->title == $data_form['title']){            
+            $slug = $data_form['slug'];
+        }else{
+            $slug = Str::slug($data_form['title']);        
+            $count = 1;
+            while(Post::where('slug', $slug)->where('id', '!=', $post->id)->first()){
+                $slug = Str::slug($data_form['title'])."-".$count;
+                $count ++;
+            }
+        }
+        $data_form['slug'] = $slug;
+        
+        $post->update($data_form);
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -101,8 +123,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('admin.posts.index');
     }
 }
