@@ -72,6 +72,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        if(!$post){
+            abort(404);
+        }
         return view('admin.posts.show', compact('post'));
     }
 
@@ -100,7 +103,7 @@ class PostController extends Controller
         $data_form = $request->all();
        
         if($post->title == $data_form['title']){            
-            $slug = $data_form['slug'];
+            $slug = $post->slug;
         }else{
             $slug = Str::slug($data_form['title']);        
             $count = 1;
